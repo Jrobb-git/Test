@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Minerva</title>
+
+    <!-- Used with Bootstrap 4 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <!--Donwloaded files and stored in resource folder -->
+    <!--    jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <!-- JQuery needed for  Bootstrap 4 and Angular -->
+    <script src="./lib/jquery/dist/jquery.js"></script>
+
+    <!-- Popper needed for Bootstrap 4 - Bootstrap 4 requires UMD version of popper.js -->
+    <script src="./lib/popper.js/dist/umd/popper.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.css">
+    <script src="./lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <!-- Angular 1.7.5 -->
+    <script type="text/javascript" src="./lib/angular/angular.js"></script>
+    <script type="text/javascript" src="./lib/angular-route/angular-route.min.js"></script>
+
+    <!-- iconic icons -->
+    <link href="./lib/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/site.css">
+
+
+    <script src="./main.config.js"></script>
+
+    <script src="test.module.js"></script>
+
+    <script src="./modules/search/search.module.js"></script>
+    <script src="./modules/search/find-cadet/find-cadet.module.js"></script>
+    <script src="./modules/search/find-cadet/find-cadet.component.js"></script>
+    <script src="./modules/search/find-cadet/find-cadet-panel.component.js"></script>
+    <script src="./modules/search/find-applicant/find-applicant.module.js"></script>
+    <script src="./modules/search/find-applicant/find-applicant.component.js"></script>
+    <script src="./modules/search/find-applicant/find-applicant-panel.component.js"></script>
+
+    <script src="test.controller.js"></script>
+    <script>
+        window.onscroll = function() {myFunction()};
+
+        var navbar = document.getElementById("navbar");
+
+
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky")
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+
+    </script>
+    <style>
+
+        .sidenav {
+            width: 130px;
+            position: sticky;
+            left: 950px;
+            top: 440px;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #2196F3;
+            display: block;
+        }
+
+        .sidenav a:hover {
+            color: #064579;
+        }
+
+        .main {
+            margin-left: 140px; /* Same width as the sidebar + left position in px */
+            font-size: 28px; /* Increased text to enable scrolling */
+            padding: 0px 10px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+    </style>
+
+</head>
+<body>
+
+<!--
+<div class="sidenav">
+    <a href="#Tabe" class="active">Tabe</a>
+    <a href="#GED">GED</a>
+    <a href="#contact">Contact</a>
+</div>
+-->
+<h1>Cadet</h1>
+<div class="content" ng-app="test" ng-controller="TestTabeController">
+
+    <div class="container-fluid" style="margin-top:0">
+        <div class="row alert-info">
+            <div class="col">
+                <button data-toggle="collapse"
+                        data-target="#searchColumn" > Search </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 "  id="searchColumn">
+                <find-cadet-panel></find-cadet-panel>
+            </div>
+
+            <div class="col alert alert-danger" ng-show="ClassDetailIDError">
+                You must select an Applicant to begin.
+            </div>
+            <div class = "col=10" ng-hide="ClassDetailIDError">
+
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#GEDModal">Add GED</button>
+
+                <!-- Modal -->
+                <div id="GEDModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3> Add GED Record</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title"></h4>
+                            </div>
+                            <div class="modal-body">
+                                Subject : <input type = "text" ng-model = "newGed.Subject"> <br>
+                                Date : <input type = "date" ng-model = "newGed.Date"> <br>
+                                Score : <input type = "text" ng-model = "newGed.Score"> <br>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type = "button" class = "btn btn-secondary"
+                                        ng-click = "addGedScores(newGed)">Save</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+<span id = "tabe">
+<h2>GED </h2>
+    <table class = "table minerva-table" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <thead>
+    <tr>
+        <th>Social Studies</th>
+        <th>Mathematics</th>
+        <th>Language</th>
+        <th>Science</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <table class = "table minerva-table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat = "listSS in gedSS">
+                    <td>{{listSS.Date}}</td>
+                    <td><input type = '' ng-model = "listSS.Score" ng-class="{'alert-danger':listSS.Score<(145), 'alert-success':listSS.Score>=(145)}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat = "listMath in gedMath">
+                    <td>{{listMath.Date}}</td>
+                    <td><input type = '' ng-model = "listMath.Score" ng-class="{'alert-danger':listMath.Score<(145), 'alert-success':listMath.Score>=(145)}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat = "list in gedLanguage">
+                    <td>{{list.Date}}</td>
+                    <td><input type = '' ng-model = "list.Score" ng-class="{'alert-danger':list.Score<(145), 'alert-success':list.Score>=(145)}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat = "list in gedScience">
+                    <td>{{list.Date}}</td>
+                    <td><input type = '' ng-model = "list.Score" ng-class="{'alert-danger':list.Score<(145), 'alert-success':list.Score>=(145)}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+     </tr>
+    </tbody>
+    </table>
+</span>
+    <div class="btn-group btn-group-lg">
+        <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.index.view.html';">Home</button>
+        <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.TABE.view.html';">TABE</button>
+        <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.GED.view.html';">GED</button>
+        <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.PracticeTests.view.html';">Practice Tests</button>
+    </div>
+</div>
+</div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Minerva</title>
+
+    <!-- Used with Bootstrap 4 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <!--Donwloaded files and stored in resource folder -->
+    <!--    jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <!-- JQuery needed for  Bootstrap 4 and Angular -->
+    <script src="./lib/jquery/dist/jquery.js"></script>
+
+    <!-- Popper needed for Bootstrap 4 - Bootstrap 4 requires UMD version of popper.js -->
+    <script src="./lib/popper.js/dist/umd/popper.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.css">
+    <script src="./lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <!-- Angular 1.7.5 -->
+    <script type="text/javascript" src="./lib/angular/angular.js"></script>
+    <script type="text/javascript" src="./lib/angular-route/angular-route.min.js"></script>
+
+    <!-- iconic icons -->
+    <link href="./lib/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/site.css">
+
+
+    <script src="./main.config.js"></script>
+
+    <script src="test.module.js"></script>
+
+    <script src="./modules/search/search.module.js"></script>
+    <script src="./modules/search/find-cadet/find-cadet.module.js"></script>
+    <script src="./modules/search/find-cadet/find-cadet.component.js"></script>
+    <script src="./modules/search/find-cadet/find-cadet-panel.component.js"></script>
+    <script src="./modules/search/find-applicant/find-applicant.module.js"></script>
+    <script src="./modules/search/find-applicant/find-applicant.component.js"></script>
+    <script src="./modules/search/find-applicant/find-applicant-panel.component.js"></script>
+
+    <script src="test.controller.js"></script>
+    <script>
+        window.onscroll = function() {myFunction()};
+
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky")
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+
+    </script>
+    <style>
+
+        .sidenav {
+            width: 130px;
+            position: sticky;
+            left: 950px;
+            top: 440px;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #2196F3;
+            display: block;
+        }
+
+        .sidenav a:hover {
+            color: #064579;
+        }
+
+        .main {
+            margin-left: 140px; /* Same width as the sidebar + left position in px */
+            font-size: 28px; /* Increased text to enable scrolling */
+            padding: 0px 10px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+    </style>
+
+</head>
+<body>
+
+<!--
+<div class="sidenav">
+    <a href="#Tabe" class="active">Tabe</a>
+    <a href="#GED">GED</a>
+    <a href="#contact">Contact</a>
+</div>
+-->
+<h1>Cadet</h1>
+<div class="content" ng-app="test" ng-controller="TestTabeController">
+
+    <div class="container-fluid" style="margin-top:0">
+        <div class="row alert-info">
+            <div class="col">
+                    <button data-toggle="collapse"
+                            data-target="#searchColumn" > Search </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 "  id="searchColumn">
+                <find-cadet-panel></find-cadet-panel>
+            </div>
+
+            <div class="col alert alert-danger" ng-show="ClassDetailIDError">
+                You must select an Applicant to begin.
+            </div>
+            <div class = "col=10" ng-hide="ClassDetailIDError">
+
+                <h1 class="center"> Academic OverView</h1>
+                <br>
+                <br>
+                <p> Last Activity Date</p>
+                <form>
+                    <input type = "date">
+                    <input type = "checkbox" id = "academicImprovement"
+                           value = "1">
+                    <label for = "academicImprovement"> Academic Improvement</label>
+                </form>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Educational Track
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Ged</a>
+                        <a class="dropdown-item" href="#">High School</a>
+
+                    </div>
+                </div>
+                <form>
+                    <input type = "checkbox" class = "btn-secondary" id = "improve"
+                           value = "2">
+                    <label for = "improve"> Improve TABE Score</label>
+                </form>
+
+
+            <span id="PreTabe">
+
+
+
+                <h2>PreTabe </h2>
+            <table id="test"  class="table minerva-table table-hover">
+                <thead>
+                <tr>
+                    <th>SubTest</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <tr  ng-repeat="preTabe in tests track by $index"
+                    >
+                    <td><input type="text"   ng-model="preTabe.SubTest"> </td>
+                    <td><input type="text" ng-model="preTabe.ScaledScore"></td>
+                    <td><input type="date" ng-model="preTabe.SubmitDate"></td>
+                    <th><button type="button" ng-click="editPreTabe(preTabe)" class="btnEdit">Edit</button> </th>
+                    <th><button type="button" ng-click="deletePreTabeScores(preTabe)" class = "btnDelete">Delete</button></th>
+                </tr>
+
+                </tbody>
+            </table>
+            </span>
+
+            <span id = "PostTabe">
+                <h2>Post Tabe</h2>
+                <table   class="table minerva-table table-hover">
+                    <thead>
+                    <tr>
+                        <th>SubTest</th>
+                        <th>Score</th>
+                        <th>Date</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    <tr ng-repeat="postTabe in postTests" >
+                        <td><input type = "text" ng-model="postTabe.SubTest"></td>
+                        <td><input type = "text" ng-model="postTabe.ScaledScore"></td>
+                        <td><input type = "date" ng-model = "postTabe.SubmitDate"></td>
+                        <th><button type="button" ng-click="editPostTabe(postTabe)" class="btnEdit">Edit</button> </th>
+                        <th><button type="button" ng-click="deletePostTabeScores(postTabe)" class = "btnDelete">Delete</button></th>
+                    </tr>
+
+                    </tbody>
+                </table>
+                    </span>
+
+                <form>
+                    <input type = "checkbox" class = "btn-secondary" id = "improveGED"
+                           value = "3">
+                    <label for = "improveGED"> Received GED </label>
+                </form>
+
+                <span id="GED">
+                <h2>GED </h2>
+            <table  class="table minerva-table table-hover">
+                <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <tr  ng-repeat="GED in ged track by $index">
+                    <td><input type="text"   ng-model="GED.Subject"></td>
+                    <td><input type="text" ng-model="GED.Score" ></td>
+                    <td><input type="date"   ng-model="GED.Date"></td>
+                    <th><button type="button" ng-click="editGedScores(GED)" class="btnEdit">Edit</button> </th>
+                    <th><button type="button" ng-click="deleteGedScores(GED)" class = "btnDelete">Delete</button></th>
+                </tr>
+
+                </tbody>
+            </table>
+                </span>
+
+                <form>
+                    <input type = "checkbox" class = "btn-secondary" id = "improvePractice"
+                           value = "4">
+                    <label for = "improve"> Improve Practice Score</label>
+                </form>
+
+                <span id="PracticeTests">
+                <h2>Practice Tests</h2>
+            <table  class="table minerva-table table-hover">
+                <thead>
+                <tr>
+                    <th>Test Type</th>
+                    <th>Subject</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <tr  ng-repeat="practice in practiceTests track by $index">
+                    <td><input type="text" ng-model="practice.TestType"> </td>
+                    <td><input type="text"   ng-model="practice.SubTest"> </td>
+                    <td><input type="text" ng-model="practice.TestScore" ></td>
+                    <td><input type="date" ng-model = "practice.TestDate"></td>
+                    <th><button type="button" ng-click="editTestScores(practice)" class="btnEdit">Edit</button> </th>
+                    <th><button type="button" ng-click="deletePracticeScores(practice)" class = "btnDelete">Delete</button></th>
+                </tr>
+                </tbody>
+            </table>
+                </span>
+
+                <form>
+                    <input type = "checkbox" class = "btn-secondary" id = "improveHighSchool"
+                           value = "5">
+                    <label for = "improve"> Received High School Diploma</label>
+                </form>
+                <div class="btn-group btn-group-lg">
+                    <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.index.view.html';">Home</button>
+                    <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.TABE.view.html';">TABE</button>
+                    <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.GED.view.html';">GED</button>
+                    <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.PracticeTests.view.html';">Practice Tests</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    window.onscroll = function() {myFunction()};
+
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+
+</script>
+
+
+
+
+</body>
+</html>
