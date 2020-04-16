@@ -7,12 +7,19 @@ class DBController {
     private $conn;
 
      //Needs to be changed based on hosting conditions.
-    private $host = "localhost";
+    /**private $host = "localhost";
 	private $user = "s94gccodec";
 	private $password = "CSCI4320_2";
-	private $database = "s94gccodec_master_SP2020";
+	private $database = "s94gccodec_master_SP2020";**/
 
-	function __construct() {
+    private $host = "localhost";
+    private $user = "phpuser";
+    private $password = "password";
+    //private $database = "attendance";
+    private $database ="s94gccodec_master_SP2019_Feb19";
+
+
+    function __construct() {
 		$this->conn = $this->connectDB();
 	}
 	function connectDB() { //Used to establish the connection between the client and server.

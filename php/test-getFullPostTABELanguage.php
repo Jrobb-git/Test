@@ -9,9 +9,9 @@ $data = array();
 $ClassDetailID = $_POST['ClassDetailID'];
 
 
-$sql="select SubmitDate, ScaledScore, Level, GradeLevel, NRSLevel from tlkpTABELevel join tblPostTabeTestScores where fkClassDetailID='$ClassDetailID'
-AND tblPostTabeTestScores.ScaledScore > tlkpTABELevel.BeginScore AND tblPostTabeTestScores.ScaledScore < tlkpTABELevel.EndScore
-AND tblPostTabeTestScores.SubTest='Language' AND tlkpTABELevel.Subject = 'Language'";
+$sql="select SubmitDate, ScaledScore, Level, GradeLevel, NRSLevel from tlkpTABELanguageLevel join tblTabe where fkClassDetailID='$ClassDetailID'
+AND tblTabe.ScaledScore > tlkpTABELanguageLevel.BeginScore AND tblTabe.ScaledScore < tlkpTABELanguageLevel.EndScore
+AND tblTabe.SubTest='Language' AND tblTabe.TestType='PostTabe'";
 
 
 $result = $conn->runSelectQuery($sql);

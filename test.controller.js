@@ -73,7 +73,7 @@ angular.module('test')
 
                 $http({
                     method:"POST",
-                    url:"./php/test-getPostTabeScores.php",
+                    url:"./php/test-getPostTabeScores1.php",
                     data:Object.toparams(post),
                     headers:{"Content-Type": "application/x-www-form-urlencoded"}
                 }).then(function (result) {
@@ -554,6 +554,133 @@ angular.module('test')
                         alert("Error adding Record");
 
                     });
+                $http({
+                    method:"POST",
+                    url:"./php/test-getPreTabeScoresLanguage.php",
+                    data:Object.toparams(post),
+                    headers:{"Content-Type": "application/x-www-form-urlencoded"}
+                }).then(function (result) {
+
+                        $scope.tests=result.data;
+                        convertDatesInArrayToHtml($scope.tests);
+                    },
+                    function (result) {
+
+                        alert("Error adding Record");
+
+                    });
+                $http({
+                    method:"POST",
+                    url:"./php/test-getPreTabeScoresMath.php",
+                    data:Object.toparams(post),
+                    headers:{"Content-Type": "application/x-www-form-urlencoded"}
+                }).then(function (result) {
+
+                        $scope.mathScores=result.data;
+                        convertDatesInArrayToHtml($scope.mathScores);
+                    },
+                    function (result) {
+
+                        alert("Error adding Record");
+
+                    });
+                $http({
+                    method:"POST",
+                    url:"./php/test-getPreTabeScoresReading.php",
+                    data:Object.toparams(post),
+                    headers:{"Content-Type": "application/x-www-form-urlencoded"}
+                }).then(function (result) {
+
+                        $scope.readingScores=result.data;
+                        convertDatesInArrayToHtml($scope.readingScores);
+                    },
+                    function (result) {
+
+                        alert("Error adding Record");
+
+                    });
+                $http({
+                    method:"POST",
+                    url:"./php/test-getPreTABELastActivityDate.php",
+                    data:Object.toparams(post),
+                    headers:{"Content-Type": "application/x-www-form-urlencoded"}
+                }).then(function (result) {
+
+                        $scope.preTabeDate=result.data;
+                        convertDatesInArrayToHtml($scope.preTabeDate);
+                    },
+                    function (result) {
+
+                        alert("Error adding Record");
+
+                    });
+
+
+
+                $http({
+                    method:"POST",
+                    url:"./php/test-getPostTabeScoresReading.php",
+                    data:Object.toparams(post),
+                    headers:{"Content-Type": "application/x-www-form-urlencoded"}
+                }).then(function (result) {
+
+                        $scope.postTabeReading=result.data;
+                        convertDatesInArrayToHtml($scope.postTabeReading);
+                    },
+                    function (result) {
+
+                        alert("Error adding Record");
+
+                    });
+
+                $http({
+                    method:"POST",
+                    url:"./php/test-getPostTabeScoresMath.php",
+                    data:Object.toparams(post),
+                    headers:{"Content-Type": "application/x-www-form-urlencoded"}
+                }).then(function (result) {
+
+                        $scope.postTabeMathScores=result.data;
+                        convertDatesInArrayToHtml($scope.postTabeMathScores);
+                    },
+                    function (result) {
+
+                        alert("Error adding Record");
+
+                    });
+
+                $http({
+                    method:"POST",
+                    url:"./php/test-getPostTabeScoresLanguage.php",
+                    data:Object.toparams(post),
+                    headers:{"Content-Type": "application/x-www-form-urlencoded"}
+                }).then(function (result) {
+
+                        $scope.postTabeLanguageScores=result.data;
+                        convertDatesInArrayToHtml($scope.postTabeLanguageScores);
+                    },
+                    function (result) {
+
+                        alert("Error adding Record");
+
+                    });
+
+                $http({
+                    method:"POST",
+                    url:"./php/test-getPostTABELastActivityDate.php",
+                    data:Object.toparams(post),
+                    headers:{"Content-Type": "application/x-www-form-urlencoded"}
+                }).then(function (result) {
+
+                        $scope.postTabeDate=result.data;
+                        convertDatesInArrayToHtml($scope.postTabeDate);
+                    },
+                    function (result) {
+
+                        alert("Error adding Record");
+
+                    });
+
 
 
 

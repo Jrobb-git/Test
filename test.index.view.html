@@ -11,35 +11,35 @@
     <!--    jQuery first, then Popper.js, then Bootstrap JS -->
 
     <!-- JQuery needed for  Bootstrap 4 and Angular -->
-    <script src="./lib/jquery/dist/jquery.js"></script>
+    <script src="../medical/lib/jquery/dist/jquery.js"></script>
 
     <!-- Popper needed for Bootstrap 4 - Bootstrap 4 requires UMD version of popper.js -->
-    <script src="./lib/popper.js/dist/umd/popper.js"></script>
+    <script src="../medical/lib/popper.js/dist/umd/popper.js"></script>
 
     <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.css">
-    <script src="./lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../medical/lib/bootstrap/dist/css/bootstrap.css">
+    <script src="../medical/lib/bootstrap/dist/js/bootstrap.js"></script>
 
     <!-- Angular 1.7.5 -->
-    <script type="text/javascript" src="./lib/angular/angular.js"></script>
-    <script type="text/javascript" src="./lib/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="../medical/lib/angular/angular.js"></script>
+    <script type="text/javascript" src="../medical/lib/angular-route/angular-route.min.js"></script>
 
     <!-- iconic icons -->
-    <link href="./lib/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/site.css">
+    <link href="../medical/lib/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../medical/css/site.css">
 
 
-    <script src="./main.config.js"></script>
+    <script src="../medical/main.config.js"></script>
 
     <script src="test.module.js"></script>
 
-    <script src="./modules/search/search.module.js"></script>
-    <script src="./modules/search/find-cadet/find-cadet.module.js"></script>
-    <script src="./modules/search/find-cadet/find-cadet.component.js"></script>
-    <script src="./modules/search/find-cadet/find-cadet-panel.component.js"></script>
-    <script src="./modules/search/find-applicant/find-applicant.module.js"></script>
-    <script src="./modules/search/find-applicant/find-applicant.component.js"></script>
-    <script src="./modules/search/find-applicant/find-applicant-panel.component.js"></script>
+    <script src="../medical/modules/search/search.module.js"></script>
+    <script src="../medical/modules/search/find-cadet/find-cadet.module.js"></script>
+    <script src="../medical/modules/search/find-cadet/find-cadet.component.js"></script>
+    <script src="../medical/modules/search/find-cadet/find-cadet-panel.component.js"></script>
+    <script src="../medical/modules/search/find-applicant/find-applicant.module.js"></script>
+    <script src="../medical/modules/search/find-applicant/find-applicant.component.js"></script>
+    <script src="../medical/modules/search/find-applicant/find-applicant-panel.component.js"></script>
 
     <script src="test.controller.js"></script>
     <script>
@@ -106,8 +106,8 @@
     <div class="container-fluid" style="margin-top:0">
         <div class="row alert-info">
             <div class="col">
-                    <button data-toggle="collapse"
-                            data-target="#searchColumn" > Search </button>
+                <button data-toggle="collapse"
+                        data-target="#searchColumn" > Search </button>
             </div>
         </div>
         <div class="row">
@@ -123,11 +123,11 @@
                 <h1 class="center"> Academic OverView</h1>
                 <br>
                 <br>
-                <p> Last Activity Date</p>
+                <p> Last Activity Date </p>
                 <form>
                     <input type = "date">
                     <input type = "checkbox" id = "academicImprovement"
-                           value = "1">
+                           value = {{postTabe.LastDate}}>
                     <label for = "academicImprovement"> Academic Improvement</label>
                 </form>
 
@@ -143,74 +143,76 @@
                 </div>
                 <form>
                     <input type = "checkbox" class = "btn-secondary" id = "improve"
-                           value = "2">
+                           value = "improve">
                     <label for = "improve"> Improve TABE Score</label>
                 </form>
 
 
-            <span id="PreTabe">
+                <span id="PreTabe">
 
 
 
-                <h2>PreTabe </h2>
             <table id="test"  class="table minerva-table table-hover">
                 <thead>
                 <tr>
-                    <th>SubTest</th>
-                    <th>Score</th>
+                    <th></th>
+                    <th>Reading</th>
+                    <th>Math</th>
+                    <th>Language</th>
                     <th>Date</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Composite</th>
+
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                <tr  ng-repeat="preTabe in tests track by $index"
-                    >
-                    <td><input type="text"   ng-model="preTabe.SubTest"> </td>
-                    <td><input type="text" ng-model="preTabe.ScaledScore"></td>
-                    <td><input type="date" ng-model="preTabe.SubmitDate"></td>
-                    <th><button type="button" ng-click="editPreTabe(preTabe)" class="btnEdit">Edit</button> </th>
-                    <th><button type="button" ng-click="deletePreTabeScores(preTabe)" class = "btnDelete">Delete</button></th>
+                <tr >
+                    <td>PreTABE</td>
+                    <td ng-repeat="preTabe in tests track by $index">
+                        <input type="text"   ng-model="preTabe.ScaledScore">
+                    </td>
+                    <td  ng-repeat="preTabe in mathScores track by $index">
+                        <input type="text" ng-model="preTabe.ScaledScore">
+                    </td>
+                    <td  ng-repeat="preTabe in readingScores track by $index">
+                        <input type="text" ng-model="preTabe.ScaledScore">
+                    </td>
+                    <td ng-repeat="preTabe in preTabeDate track by $index">
+                        <input type="date" ng-model="preTabe.LastDate">
+                    </td>
+                </tr>
+
+                <tr >
+                    <td>PostTABE</td>
+                    <td ng-repeat="postTABE in postTabeReading track by $index">
+                        <input type="text"   ng-model="postTABE.maxScore">
+                    </td>
+                    <td  ng-repeat="postTABE in postTabeMathScores track by $index">
+                        <input type="text" ng-model="postTABE.maxScore">
+                    </td>
+                    <td  ng-repeat="postTABE in postTabeLanguageScores track by $index">
+                        <input type="text" ng-model="postTABE.maxScore">
+                    </td>
+                    <td ng-repeat="postTABE in postTabeDate track by $index">
+                        <input type="date" ng-model="postTABE.LastDate">
+                    </td>
                 </tr>
 
                 </tbody>
             </table>
             </span>
 
-            <span id = "PostTabe">
-                <h2>Post Tabe</h2>
-                <table   class="table minerva-table table-hover">
-                    <thead>
-                    <tr>
-                        <th>SubTest</th>
-                        <th>Score</th>
-                        <th>Date</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                    <tr ng-repeat="postTabe in postTests" >
-                        <td><input type = "text" ng-model="postTabe.SubTest"></td>
-                        <td><input type = "text" ng-model="postTabe.ScaledScore"></td>
-                        <td><input type = "date" ng-model = "postTabe.SubmitDate"></td>
-                        <th><button type="button" ng-click="editPostTabe(postTabe)" class="btnEdit">Edit</button> </th>
-                        <th><button type="button" ng-click="deletePostTabeScores(postTabe)" class = "btnDelete">Delete</button></th>
-                    </tr>
 
-                    </tbody>
-                </table>
-                    </span>
 
-                <form>
-                    <input type = "checkbox" class = "btn-secondary" id = "improveGED"
-                           value = "3">
-                    <label for = "improveGED"> Received GED </label>
-                </form>
+            </div>
+        </div>
 
-                <span id="GED">
+        <form>
+            <input type = "checkbox" class = "btn-secondary" id = "improveGED"
+                   value = "improveGED">
+            <label for = "improveGED"> Received GED </label>
+        </form>
+
+        <span id="GED">
                 <h2>GED </h2>
             <table  class="table minerva-table table-hover">
                 <thead>
@@ -235,14 +237,41 @@
                 </tbody>
             </table>
                 </span>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#GEDModal">Add GED</button>
 
-                <form>
-                    <input type = "checkbox" class = "btn-secondary" id = "improvePractice"
-                           value = "4">
-                    <label for = "improve"> Improve Practice Score</label>
-                </form>
+        <!-- Modal -->
+        <div id="GEDModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
 
-                <span id="PracticeTests">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3> Add GED Record</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        Subject : <input type = "text" ng-model = "newGed.Subject"> <br>
+                        Date : <input type = "date" ng-model = "newGed.Date"> <br>
+                        Score : <input type = "text" ng-model = "newGed.Score"> <br>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type = "button" class = "btn btn-secondary"
+                                ng-click = "addGedScores(newGed)">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <form>
+            <input type = "checkbox" class = "btn-secondary" id = "improvePractice"
+                   value = "improvePractice">
+            <label for = "improve"> Improve Practice Score</label>
+        </form>
+
+        <span id="PracticeTests">
                 <h2>Practice Tests</h2>
             <table  class="table minerva-table table-hover">
                 <thead>
@@ -268,21 +297,50 @@
                 </tbody>
             </table>
                 </span>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#PracticeModal">Add Practice Test</button>
 
-                <form>
-                    <input type = "checkbox" class = "btn-secondary" id = "improveHighSchool"
-                           value = "5">
-                    <label for = "improve"> Received High School Diploma</label>
-                </form>
-                <div class="btn-group btn-group-lg">
-                    <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.index.view.html';">Home</button>
-                    <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.TABE.view.html';">TABE</button>
-                    <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.GED.view.html';">GED</button>
-                    <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.PracticeTests.view.html';">Practice Tests</button>
+        <!-- Modal -->
+        <div id="PracticeModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3> Add Practice Test</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        Test type: <input type = "text" ng-model="newPractice.TestType"> <br>
+                        Subtest : <input type = "text" ng-model = "newPractice.SubTest"> <br>
+                        Date : <input type = "date" ng-model = "newPractice.TestDate"> <br>
+                        Score : <input type = "text" ng-model = "newPractice.TestScore"> <br>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type = "button" class = "btn btn-secondary"
+                                ng-click = "addTests(newPractice)">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
                 </div>
             </div>
+
+        </div>
+
+        <form>
+            <input type = "checkbox" class = "btn-secondary" id = "improveHighSchool"
+                   value = "improveHighSchool">
+            <label for = "improve"> Received High School Diploma</label>
+        </form>
+        <div class="btn-group btn-group-lg">
+            <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test_TABE.view.html';">Home</button>
+            <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.TABE.view.html';">TABE</button>
+            <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.FullGEDView.html';">GED</button>
+            <button type="button" class="btn btn-primary" onclick= "window.location.href = 'test.PracticeTests.view.html';">Practice Tests</button>
         </div>
     </div>
+</div>
+</div>
 </div>
 
 
