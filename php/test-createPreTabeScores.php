@@ -13,8 +13,8 @@ $ScaledScore = $conn->sanitize($_POST['ScaledScore']);
 
 
 
-$sql = "INSERT INTO tblPreTabeTestScores (fkClassDetailID,SubTest, SubmitDate,ScaledScore)
- VALUES ('$ClassDetailID ','$SubTest','$SubmitDate','$ScaledScore')";
+$sql = "INSERT INTO tblTabe (fkClassDetailID,SubTest, SubmitDate,ScaledScore)
+ VALUES ('$ClassDetailID ','$SubTest','$SubmitDate','$ScaledScore','postTABE')";
 
 
 

@@ -123,13 +123,20 @@
                 <h1 class="center"> Academic OverView</h1>
                 <br>
                 <br>
-                <p> Last Activity Date </p>
-                <form>
-                    <input type = "date">
-                    <input type = "checkbox" id = "academicImprovement"
-                           value = {{postTabe.LastDate}}>
-                    <label for = "academicImprovement"> Academic Improvement</label>
-                </form>
+                <table>
+                    <thead>
+                    <tr>
+                        Last Activity Date
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td ng-repeat="TABE in tabeDate track by $index">
+                            <input type="date"readonly ng-model="TABE.ActivityDate">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -673,7 +673,25 @@ angular.module('test')
                 }).then(function (result) {
 
                         $scope.postTabeDate=result.data;
+                        $scope.tabeDate=result.data;
                         convertDatesInArrayToHtml($scope.postTabeDate);
+                        convertDatesInArrayToHtml($scope.tabeDate);
+                    },
+                    function (result) {
+
+                        alert("Error adding Record");
+
+                    });
+
+                $http({
+                    method:"POST",
+                    url:"./php/test-getLastActivityDate.php",
+                    data:Object.toparams(post),
+                    headers:{"Content-Type": "application/x-www-form-urlencoded"}
+                }).then(function (result) {
+
+                        $scope.tabeDate=result.data;
+                        convertDatesInArrayToHtml($scope.tabeDate);
                     },
                     function (result) {
 
